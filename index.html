@@ -1,0 +1,56 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote of the Day</title>
+  <!-- <link rel="stylesheet" href="styles.css"> -->/
+  <style>
+    /* styles.css */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#quote {
+  margin-bottom: 20px;
+}
+
+#getQuoteBtn {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Quote of the Day</h1>
+    <div id="quote"></div>
+    <button id="getQuoteBtn">Get Quote</button>
+  </div>
+
+  <script>
+    // script.js
+document.addEventListener('DOMContentLoaded', () => {
+  const quoteElement = document.getElementById('quote');
+  const getQuoteBtn = document.getElementById('getQuoteBtn');
+
+  getQuoteBtn.addEventListener('click', () => {
+    fetch('http://localhost:3000/api/quotes/random')
+      .then(response => response.json())
+      .then(data => {
+        quoteElement.innerText = `"${data.text}" - ${data.author}`;
+      })
+      .catch(error => console.error('Error:', error));
+  });
+});
+
+  </script>
+</body>
+</html>
